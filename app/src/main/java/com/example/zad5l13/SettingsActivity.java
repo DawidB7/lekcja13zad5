@@ -27,7 +27,6 @@ public class SettingsActivity extends AppCompatActivity {
         switchNotifications = findViewById(R.id.switchNotifications);
         buttonSave = findViewById(R.id.buttonSave);
 
-        // --- Wczytanie istniejących ustawień ---
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         String savedName = prefs.getString(NAME_KEY, "");
         boolean savedSwitch = prefs.getBoolean(NOTIF_KEY, false);
@@ -35,7 +34,6 @@ public class SettingsActivity extends AppCompatActivity {
         editTextName.setText(savedName);
         switchNotifications.setChecked(savedSwitch);
 
-        // --- Zapis po kliknięciu ---
         buttonSave.setOnClickListener(v -> {
             SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
             editor.putString(NAME_KEY, editTextName.getText().toString());
@@ -43,7 +41,7 @@ public class SettingsActivity extends AppCompatActivity {
             editor.apply();
 
             Toast.makeText(SettingsActivity.this, "Ustawienia zapisane!", Toast.LENGTH_SHORT).show();
-            finish(); // Powrót do MainActivity
+            finish();
         });
     }
 }
