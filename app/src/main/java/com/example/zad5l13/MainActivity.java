@@ -25,16 +25,13 @@ public class MainActivity extends AppCompatActivity {
         textViewNotifications = findViewById(R.id.textViewNotifications);
         buttonSettings = findViewById(R.id.buttonSettings);
 
-        // --- Odczyt danych z SharedPreferences ---
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         String userName = prefs.getString(NAME_KEY, "gościu");
         boolean notificationsEnabled = prefs.getBoolean(NOTIF_KEY, false);
 
-        // --- Wyświetlenie danych ---
         textViewGreeting.setText("Witaj, " + userName + "!");
         textViewNotifications.setText("Powiadomienia: " + (notificationsEnabled ? "Włączone" : "Wyłączone"));
 
-        // --- Przejście do ustawień ---
         buttonSettings.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
@@ -44,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Aktualizacja po powrocie z ustawień
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         String userName = prefs.getString(NAME_KEY, "gościu");
         boolean notificationsEnabled = prefs.getBoolean(NOTIF_KEY, false);
